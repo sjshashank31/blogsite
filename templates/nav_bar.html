@@ -1,0 +1,51 @@
+
+{% load static %}
+
+{% block content %}
+ <nav class="navbar fixed-top navbar-expand-lg navbar-light black scrolling-navbar">
+      <div class="container">
+
+        <!-- Brand -->
+        <a class="navbar-brand waves-effect" href="{% url 'home:index' %}" >
+          <strong class="white-text">BlogOverflow</strong>
+        </a>
+
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="white navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <!-- Left -->
+          <ul class="navbar-nav mr-auto">
+              {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class=" white-text font-weight-bold nav-link waves-effect" href="{% url 'users:profile' %}"
+              >POST HERE</a>
+            </li>
+            <li class="nav-item">
+              <a class="white-text font-weight-bold nav-link waves-effect" href="{% url 'logout' %}" >Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="white-text font-weight-bold nav-link waves-effect" href="{% url 'home:blogger' %}"  >{{ user.get_username }}</a>
+            </li>
+
+              {% else %}
+            <li class="nav-item">
+              <a class="white-text font-weight-bold nav-link waves-effect " href="{% url 'login' %}" >LogIn</a>
+            </li>
+            <li class="nav-item">
+              <a class="white-text font-weight-bold nav-link waves-effect" href="{% url 'users:register' %}" >Signup</a>
+            </li>
+              {% endif %}
+          </ul>
+
+        </div>
+
+      </div>
+    </nav>
+
+{% endblock content %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% include 'nav_bar.html' %}
+
+  <!--Main layout-->
+  <main class=" pt-5 mb-5">
+    <div class="container">
+        <h3 class="card-header font-weight-bold white">Your blog</h3>
+
+      <hr class="my-5">
+
+      <!--Section: Cards-->
+      <section class="text-center">
+
+        <!--Grid row-->
+        <div class="row mb-4 wow fadeIn">
+
+          <!--Grid column-->
+          {% for post in post %}
+
+          <div class="col-lg-3 col-md-12 mb-4">
+
+            <div class="card">
+
+              <!--Card image-->
+
+              <div class="view overlay">
+                <div class="embed-responsive embed-responsive-16by9 rounded-top">
+                  {% if post.img %}
+                 <img class="embed-responsive-item" src="{{ post.img.url }}" ><img>
+                {% endif %}
+                </div>
+              </div>
+
+              <!--Card content-->
+              <div class="card-body">
+                <!--Title-->
+                <h4 class="card-title"><a href="{{ post.get_blog_url }}">{{ post.post_title }}</a></h4>
+                <p> {{ post.date_published }} </p>
+                <!--Text-->
+                  <strong> POSTED BY {{ post.user }}</strong>
+                </p>
+                <p>Visit profile <a href="{{ post.user_profile_link }}">{{ post.user_profile_link }}</a></p>
+              </div>
+
+            </div>
+
+          </div>
+          {% empty %}
+          <p class=" font-weight-bold text-center ml-5">You have not posted anything yet</p>
+          <!--Grid column-->
+
+          {% endfor %}
+
+        </div>
+        <!--Grid row-->
+
+
+      </section>
+      <!--Section: Cards-->
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+  <!--Footer-->
+
+
+{% endblock content %}

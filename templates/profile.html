@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% include 'nav_bar.html' %}
+
+<div class="container card mb-5  wow fadeIn offset-2">
+    <div class="card-header font-weight-bold">Post Your Blog</div>
+    <div class="card-body">
+
+        <!-- Default form reply -->
+        <form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+         {{form|crispy}}
+            <div class="text-center mt-4">
+                <button class="btn btn-info btn-md" type="submit">Post</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

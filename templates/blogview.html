@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% include 'nav_bar.html' %}
+
+<div class="row mb-4 wow fadeIn">
+
+    <!--Grid column-->
+    <div class="col-md-8  mb-4 ">
+
+        <!--Card-->
+        <div class="card">
+
+            <!--Card image-->
+
+                <div class="embed-responsive rounded-top text-center" style="width:300px;height:300px;">
+                    <img class="card-img-overlay embed-responsive-item" src="{{object.img.url }}"><img>
+                </div>
+
+
+            <!--Card content-->
+            <div class="card-body">
+                <!--Title-->
+                <h4 class="card-title">{{ object.post_title }}</h4>
+                <p> {{ object.date_published }} </p>
+                <!--Text-->
+                <strong> POSTED BY {{ object.user_name }}</strong>
+                <p>Visit profile <a href="{{ post.user_profile_link }}">{{ object.user_profile_link }}</a></p>
+                <p>{{ object.post_content }}</p>
+            </div>
+
+        </div>
+        <!--/.Card-->
+
+    </div>
+    <div class="col-md-4">
+        <div class=" card   wow fadeIn" style="margin-top:80px;">
+    <div class="card-header font-weight-bold">Post comment</div>
+    <div class="card-body">
+
+        <!-- Default form reply -->
+        <form method="POST" >
+            {% csrf_token %}
+            {{ form | crispy }}
+            <div class="text-center mt-4">
+                <button class="btn btn-info btn-md" type="submit">Post comment</button>
+            </div>
+        </form>
+    </div>
+</div>
+    </div>
+    <!--Grid column-->
+
+</div>
+<div class="col-md-4" style="margin-bottom:100px;">
+        <div class=" card   wow fadeIn" style="margin-top:80px;">
+    <div class="card-header font-weight-bold">Comments</div>
+{% for comments in comments%}
+    <div class="card-body border">
+        <p class="card-header">{{comments.user }}</p>
+        <p class="card-body">{{comments.comment}}</p>
+    </div>
+            {% empty %}
+          <p class=" font-weight-bold text-center ml-5">No comments here yet</p>
+
+{% endfor %}
+</div>
+</div>
+
+
+
+{% endblock %}
